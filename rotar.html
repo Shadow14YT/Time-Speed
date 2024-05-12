@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        text-align: center;
+        background-color: rgba(66, 66, 66, 0.527);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image:url("porsche_fondo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        flex-direction: column;
+    }
+    h2{
+        color: white;
+    }
+    div{
+        display: grid;
+        place-content: center;
+        float: left;
+    }
+    td{
+        padding: 50px;
+    }
+  </style>
+<body>
+    <table>
+        <tr>
+            <td>
+                <div onclick="window.location.href='Jugar.html'"><img src="azul.png" id="imagen" onclick="girarImagen()"></div>
+            </td>
+            <td>
+                <div onclick="window.location.href='Jugar.html'"><img src="cocheAzul.png" id="imagen2" onclick="girarImagen()"></div>
+            </td>
+            <td>
+                <div onclick="window.location.href='Jugar.html'"><img src="verde.png" id="imagen3" onclick="girarImagen()"></div>
+            </td>
+            <td>
+                <div onclick="window.location.href='Jugar.html'"><img src="cocherosita.png" id="imagen4" onclick="girarImagen()"></div>
+            </td>
+        </tr>
+    </table>
+</body>
+<script>
+    var imagen = document.getElementById('imagen');
+    var imagen2 = document.getElementById("imagen2");
+    var imagen3 = document.getElementById("imagen3");
+    var imagen4 = document.getElementById("imagen4");
+    var grados = 10;
+    setInterval(
+        function girarImagen() {
+        grados = grados +10; 
+        imagen.style.transform = 'rotate(' + grados + 'deg)';
+        imagen2.style.transform = 'rotate(' + grados + 'deg)';
+        imagen3.style.transform = 'rotate(' + grados + 'deg)';
+        imagen4.style.transform = 'rotate(' + grados + 'deg)';
+    }
+    ,60)
+    
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>!! JUGAR !!</title>
+  <style>
+    body{
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image:url("seleccioncoche.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    button {
+        margin: 0px auto;
+        width: 150px;
+        height: 50px;
+        background-color: rgba(66, 66, 66, 0.527);
+        color: rgb(0, 0, 0);
+        border-radius: 10px;
+        cursor: pointer;
+        border: .1px solid white;
+    }
+  </style>
+</head>
+<body onload="procesos()">
+    <audio id="musica"loop>
+      <source src="cancion1.mp3" type="audio/mp3">
+    </audio>
+  <table>
+    <tr>
+      <td><button onclick="window.location.href='Mapa2.html'"><h3>¡FACIL! </h3><p>El Batimóvil es el sueño de todo niño hecho realidad: ¡parte coche de carreras, parte tanque blindado y parte bat-móvil! Es como si Batman hubiera decidido que el tráfico normal no era lo suyo y se lanzara a las calles con un juguete de control remoto gigante. ¡Con sus llantas resistentes a los pinchazos y su sistema de navegación que te lleva directo a la batcueva sin atascos, este auto es más cool que un pingüino en un iglú con aire acondicionado!</p><br><img src="azul.png" id="imagen" onclick="girarImagen()"></button></td>
+      <td><button onclick="window.location.href='Mapadejuego.html'"><h3>¡NORMAL!</h3><p>El auto de carreras del Jefazo es como una discoteca móvil sobre ruedas, con luces parpadeantes y música a todo volumen. Cada curva es una oportunidad para hacer una coreografía improvisada, y el humo de los neumáticos es más un efecto especial que un indicador de velocidad. ¡Hasta los semáforos se ponen en verde por pura diversión cuando este bólido pasa cerca!</p><img src="cocheAzul.png" id="imagen2" onclick="girarImagen()"></button></td>
+      <td><button onclick="window.location.href='Dificil.html'"><h3>¡DIFICIL!</h3><p>El auto de carreras de la tortuga es un verdadero espectáculo sobre ruedas. Con un caparazón aerodinámico que despierta envidia en los coches deportivos, y una velocidad que desafía todas las expectativas (bueno, al menos las expectativas de una tortuga), este bólido está listo para darle una carrera a la liebre. ¡Y lo mejor de todo es que viene con un sistema de navegación lento pero seguro que te lleva a la meta con estilo y sin preocupaciones!</p><img src="verde.png" id="imagen3" onclick="girarImagen()"></button></td>
+      <td><button onclick="window.location.href='supervivencia.html'"><h3>¡AUMENTO!</h3><p>El auto de carreras de Messi en la F1 es como un bailarín en zapatillas de ballet sobre el asfalto, pero con la ferocidad de un león hambriento de victoria. Es tan rápido que los radares tienen que hacer yoga para mantenerse al día con él, y las curvas se ponen celosas de su elegante estilo. ¡Incluso los mecánicos están considerando cambiar sus herramientas por botines de fútbol para seguirle el ritmo!</p><img src="cocherosita.png" id="imagen4" onclick="girarImagen()"></button></td>
+    </tr>
+  </table>
+  
+</body>
+<script>
+   function procesos(){
+    var imagen = document.getElementById('imagen');
+    var imagen2 = document.getElementById("imagen2");
+    var imagen3 = document.getElementById("imagen3");
+    var imagen4 = document.getElementById("imagen4");
+    var grados = 10;
+    setInterval(
+        function girarImagen() {
+        var musica = document.getElementById("musica");
+        musica.play();
+        grados = grados +10; 
+        imagen.style.transform = 'rotate(' + grados + 'deg)';
+        imagen2.style.transform = 'rotate(' + grados + 'deg)';
+        imagen3.style.transform = 'rotate(' + grados + 'deg)';
+        imagen4.style.transform = 'rotate(' + grados + 'deg)';
+    }
+    ,60);
+   }
+</script>
+</html>

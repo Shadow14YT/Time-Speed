@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time Speed</title>
+</head>
+<style>
+    body {
+        background-color: black;
+        text-align: center;
+        background-image:url("");
+
+    }
+    .road
+    {
+        position: relative;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+        transform: rotate(-90deg);
+    }
+    .road::before{
+        content: '';
+        position: absolute;
+        right: 300px;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg,#fff,#fff 50%,
+        transparent 50%, transparent 100%);
+        background-size:50px;
+        animation: animate_road .2s linear infinite;
+    }
+    @keyframes animate_road {
+        10%
+        {
+            background-position: 100px 0;
+        }
+    }
+
+body{
+        background-color: #000000;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-content: center;
+    }
+table{
+    display: grid;
+    place-content: center;
+    margin-top: 10%;
+}
+img.coche{
+    width: 100%;
+    height:  auto;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flexbox;
+}
+body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000000;
+        font-family: Arial, sans-serif;
+        
+    }
+    #juego {
+        width: 400px;
+        height: 600px;
+        position: relative;
+        box-shadow: 10px 0px 0px 0px  rgb(100, 109, 156),-10px 0px 0px 0px  rgb(100, 109, 156);
+        margin: 0px auto;
+    }
+    #carro {
+        width: 30px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+    }
+    .obstaculo {
+        position: absolute;
+        width: 30px;
+        border-radius: 10px;
+        top: -30px;
+        background-color: aqua;
+    }
+    div.punto{
+        color: antiquewhite;
+    }
+</style>
+<div class="road">
+</div class="police"><div></div>
+<div id="puntos" class="punto">Puntos: 0</div>
+    <div id="juego">
+        <img src="Autobus.png" class="coche" id="carro">
+    </div>
+    
+</body>
+<script>
+    const juego = document.getElementById('juego');
+    const carro = document.getElementById('carro');
+    const puntos = document.getElementById('puntos');
+    var tipocarro =1;
+    let carroPosicion = 50; // Inicialmente centrado
+    let puntosValor = 0;
+    var infinito=0;
+    let velocidadObstaculos = 10; // Velocidad inicial de los obstáculos
+
+    // Mover el carro con las teclas de flecha
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowLeft' && carroPosicion > -5) {
+            carroPosicion -= 5;
+        } else if (event.key === 'ArrowRight' && carroPosicion < 95) {
+            carroPosicion += 5;
+        }
+        carro.style.left = `${carroPosicion}%`;
+    });
+
+    // Crear obstáculos
+    setInterval(function() {
+        const obstaculo = document.createElement('img');
+        switch (tipocarro) {
+            case 1:
+                obstaculo.src = 'cocherosita.png';
+                tipocarro =tipocarro + 1;
+                break;
+            case 2:
+                obstaculo.src = 'rojo.png';
+                tipocarro =tipocarro + 1;
+                break;
+            case 3:
+                obstaculo.src = 'azul.png';
+                tipocarro =tipocarro + 1;
+                break;
+            case 4:
+                obstaculo.src ='verde.png';
+                tipocarro=1;
+                break;
+        }
+        obstaculo.classList.add('obstaculo');
+        obstaculo.style.left = `${Math.random() * 370}px`; // Posición aleatoria en el ancho del juego
+        juego.appendChild(obstaculo);
+        
+        // Animación del obstáculo
+        const obstaculoIntervalo = setInterval(function() {
+            const obstaculoPosicion = obstaculo.offsetTop;
+            // Comprobar si el obstáculo se ha salido del juego
+            
+            if (obstaculoPosicion > 550) {
+                obstaculo.remove();
+                clearInterval(obstaculoIntervalo);
+            } else {
+                obstaculo.style.top = `${obstaculoPosicion + velocidadObstaculos}px`; // Velocidad del obstáculo
+                if (detectarColision(obstaculo, carro)) {
+                    // Colisión detectada, juego terminado
+                    window.location.reload(); // Recargar la página para reiniciar el juego
+                }
+            }
+        }, 50);
+    }, 1000); // Crear un nuevo obstáculo cada segundo
+
+    function detectarColision(obstaculo, carro) {
+        const rect1 = obstaculo.getBoundingClientRect();
+        const rect2 = carro.getBoundingClientRect();
+        return !(rect1.right < rect2.left ||
+            rect1.left > rect2.right ||
+            rect1.bottom < rect2.top ||
+            rect1.top > rect2.bottom);
+    }
+
+    // Contador de puntos
+    setInterval(function() {
+        puntosValor++;
+        puntos.textContent = 'Puntos: ' + puntosValor;
+        if (puntosValor === 60 || puntosValor === 120 || puntosValor === 180 || puntosValor === 240+infinito) {
+            infinito= infinito+60;
+            velocidadObstaculos += 10; // Aumento de velocidad de los obstáculos en puntos específicos
+        }
+    }, 1000);
+</script>
+
+</html>

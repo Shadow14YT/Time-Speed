@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time Speed</title> 
+    <link rel="stylesheet" href="fuente3.woff">
+</head>
+<style>
+    body {
+        background-color: #f4ecec;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        overflow: hidden;
+        display: grid;
+        place-content: center; 
+    } 
+    #juego {
+        width: 250px;
+        height: 735px;
+        position: relative;
+        margin: 0px auto;
+        background-image: url('w-road.png');
+        background-size: 100%; 
+        background-repeat: repeat-y;
+        z-index: -10; /* Asegura que esté detrás de la línea de la carretera */
+    }
+
+    #carro {
+        background-image: url('cocherosita.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 65px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 1px;
+        z-index: 10px;
+    }
+    
+    .obstaculo {
+        position: absolute;
+        width: 30px;
+        border-radius: 10px;
+        top: -30px; 
+    }
+
+    .detalle1 {
+        background-image: url('w-detalle1.png');
+        animation-delay: 0s;
+    }
+
+    .detalle2 {
+        background-image: url('w-detalle2.png');
+        animation-delay: 1s;
+    }
+
+    @keyframes mover {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            transform: translateY(100%);
+        }
+    } 
+
+    #puntos {
+        position: absolute;
+        top: 190px;
+        left: 640px;
+        transform: translateX(-50%);
+        color: rgb(0, 0, 0);
+        font-family: fuente3, sans-serif;
+        font-size: 120px;
+    }
+
+    #velocidad {
+        position: absolute;
+        top: 230px;
+        right: 480px;
+        transform: translateX(-50%);
+        color: rgb(0, 0, 0);
+        font-family: fuente3, sans-serif;
+        font-size: 120px;
+    }
+
+
+    img.coche {
+        width: 30px;
+        height: 50px;
+        border-radius: 6px;
+        box-shadow: 0px -110px 90px 4px rgb(226, 211, 5);
+    }
+    @font-face { 
+    font-family: 'fuente3';
+    src: url('fuente3.woff') format('woff'); 
+}
+</style>
+<body onclick="audios()">
+    <audio id="musica"loop>
+        <source src="cancion2.mp3" type="audio/mp3">
+    </audio>
+     <div class="road">
+        </div class="police"><div>
+            <img src="w-detalles.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 530px; top: 675px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 560px; top: 625px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 550px; top: 615px; z-index: 5;">    
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 560px; top: 565px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 540px; top: 550px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 510px; top: 500px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 560px; top: 460px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 550px; top: 450px; z-index: 5;">    
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 560px; top: 370px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 530px; top: 390px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 490px; top: 320px; z-index: 5;">    
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 560px; top: 300px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 550px; top: 310px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 510px; top: 200px; z-index: 5;"> 
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 490px; top: 220px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 530px; top: 255px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 560px; top: 190px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 540px; top: 145px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 530px; top: 135px; z-index: 5;">    
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 560px; top: 90px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 540px; top: 15px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; left: 510px; top: 15px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; left: 570px; top: 65px; z-index: 5;"> 
+
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; right: 560px; top: 565px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 540px; top: 550px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; right: 510px; top: 500px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 560px; top: 460px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 550px; top: 450px; z-index: 5;">    
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; right: 560px; top: 370px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 530px; top: 390px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; right: 490px; top: 320px; z-index: 5;">    
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 560px; top: 300px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 550px; top: 310px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px;right:  510px; top: 200px; z-index: 5;"> 
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px;right:  490px; top: 220px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 530px; top: 255px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 560px; top: 190px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 540px; top: 145px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px; right: 530px; top: 135px; z-index: 5;">    
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; right:  510px; top: 90px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px;  right: 540px; top: 15px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; right:  510px; top: 15px; z-index: 5;"> 
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px;  right: 570px; top: 65px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px;  right: 570px; top: 650px; z-index: 5;">
+            <img src="w-detalle2.png" alt="" style="position: absolute; width: 100px; height: 80px; right:  530px; top: 665px; z-index: 5;">
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px;  right: 560px; top: 667px; z-index: 5;">    
+            <img src="w-detalle1.png" alt="" style="position: absolute; width: 80px; height: 30px;  right: 520px; top: 630px; z-index: 5;">
+        </div>
+    <div class="fondo">    
+    </div>
+    <div id="juego">
+        <img src="cocherosita.png" class="coche" id="carro">
+        <div id="puntos">Puntos 0</div>
+        <div id="velocidad">Velocidad</div>
+    </div>
+
+    <script>
+        const juego = document.getElementById('juego');
+        const carro = document.getElementById('carro');
+        const puntos = document.getElementById('puntos');
+        const velocidad = document.getElementById('velocidad');
+        var tipocarro =1;
+        let carroPosicion = 50; // Inicialmente centrado
+        let puntosValor = 0;
+        var infinito=0;
+        let velocidadObstaculos = 10; // Velocidad inicial de los obstáculos
+    
+        // Mover el carro con las teclas de flecha
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft' && carroPosicion > 20) {
+                carroPosicion -= 7;
+            } else if (event.key === 'ArrowRight' && carroPosicion < 80) {
+                carroPosicion += 7;
+            }
+            carro.style.left = `${carroPosicion}%`;
+        });
+    
+        // Crear obstáculos
+        setInterval(function() {
+            const obstaculo = document.createElement('img');
+            switch (tipocarro) {
+                case 1:
+                    obstaculo.src = 'cocherosita.png';
+                    tipocarro =tipocarro + 1;
+                    break;
+                case 2:
+                    obstaculo.src = 'cocheazul.png';
+                    tipocarro =tipocarro + 1;
+                    break;
+                case 3:
+                    obstaculo.src = 'azul.png';
+                    tipocarro =tipocarro + 1;
+                    break;
+                case 4:
+                    obstaculo.src ='verde.png';
+                    tipocarro=1;
+                    break;
+            }
+            obstaculo.classList.add('obstaculo');
+            obstaculo.style.left = `${35+ Math.random() * 150}px`;
+            juego.appendChild(obstaculo);
+            
+            // Animación del obstáculo
+            const obstaculoIntervalo = setInterval(function() {
+                const obstaculoPosicion = obstaculo.offsetTop;
+                // Comprobar si el obstáculo se ha salido del juego
+                if (obstaculoPosicion > 750) { /*550*/
+                    obstaculo.remove();
+                    clearInterval(obstaculoIntervalo);
+                } else {
+                    obstaculo.style.top = `${obstaculoPosicion + velocidadObstaculos}px`; // Velocidad del obstáculo
+                    if (detectarColision(obstaculo, carro)) {
+                        // Colisión detectada, juego terminado
+                        window.location.href="carga.html"; // Recargar la página para reiniciar el juego
+                    }
+                }
+            }, 50);
+        }, 1000); // Crear un nuevo obstáculo cada segundo
+    
+        function detectarColision(obstaculo, carro) {
+            const rect1 = obstaculo.getBoundingClientRect();
+            const rect2 = carro.getBoundingClientRect();
+            return !(rect1.right < rect2.left ||
+                rect1.left > rect2.right ||
+                rect1.bottom < rect2.top ||
+                rect1.top > rect2.bottom);
+        }
+    
+        // Contador de puntos
+        setInterval(function() {
+            puntosValor++;
+            puntos.textContent = 'SCO' + ' ' + 'RE  ' + puntosValor;
+            if (puntosValor === 60 || puntosValor === 120 || puntosValor === 180 || puntosValor === 240+infinito) {
+                infinito= infinito+60;
+                velocidadObstaculos += 10;
+            }
+            velocidad.textContent = 'V' + ' ' + velocidadObstaculos;
+        }, 1000);
+        function audios(){
+            var musica = document.getElementById("musica");
+            musica.play();
+        }
+    </script>
+</body>
+</html>

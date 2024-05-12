@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INICIANDO...</title>
+  <style>
+    body{
+        text-align: center;
+        background-color: rgba(66, 66, 66, 0.527);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image:url("cargando.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        flex-direction: column;
+    }
+    h2{
+        color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2>Cargando... </h2>
+  <progress value="0" max="100"></progress>
+
+  <script>
+    var progressBar = document.querySelector('progress');
+    var currentValue = 0;
+    var interval = setInterval(function() {
+      currentValue += 10;
+      progressBar.value = currentValue;
+      if (currentValue >= 100) {
+        clearInterval(interval);
+        window.location.href='jugar.html'
+      }
+    }, 750);
+  </script>
+</body>
+</html>
